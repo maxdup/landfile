@@ -1,0 +1,19 @@
+{
+  "name": "landfile",
+  "version": "1.0.0",
+  "description": "An internet landfill for your files. Self-host your data. Forget \"cloud\" services.",
+  "main": ".#webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maxdup/landfile.git"
+  },
+  "author": "Maxime Dupuis",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/maxdup/landfile/issues"
+  },
+  "homepage": "https://github.com/maxdup/landfile#readme"
+}

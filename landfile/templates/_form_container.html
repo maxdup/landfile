@@ -1,0 +1,15 @@
+{% include "_head.html" %}
+<body>
+  <img class="page-background" src="static/img/landfile.jpg"/>
+  {% include "_messages.html" %}
+  {% include "_nav.html"%}
+  {% from "_field_macros.html" import render_field_with_errors, render_field, render_checkbox %}
+  <div class="row valign-wrapper" style="min-height: 80vh">
+    <div class="col s8 offset-s2 card">
+      <div class="card-content">
+        {% block content %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+</body>

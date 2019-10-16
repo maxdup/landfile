@@ -1,0 +1,30 @@
+{% include "_head.html" %}
+<body>
+  <img class="page-background" src="static/img/landfile.jpg"/>
+  {% include "_messages.html" %}
+  {% include "_nav.html"%}
+  {% from "_macros.html" import render_field_with_errors, render_field %}
+  <div class="row" style="min-height: 80vh">
+    <div class="container main-page">
+      <div class="center-align valign-wrapper" style="min-height: 40vh">
+        <div>
+          <h4 class=" white-text">an electronic</h4>
+          <h1 class=" white-text">DUMP SITE</h1>
+          <h6 class=" white-text">for my files</h6>
+        </div>
+      </div>
+      <div class="col s12 m8" style="min-height: 40vh">
+        <div class="card">
+          <div class="card-content">
+            <p>This is my personal digital landfill.</br>
+              I use it to dump and publicly share my files.</br>
+              You can dump your files here too, but only I will be able to see them.</p>
+          </div>
+          <div class="card-action">
+            <a href="/dump">Dump a file</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
