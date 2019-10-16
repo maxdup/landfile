@@ -1,0 +1,35 @@
+{% extends "_form_container.html" %}
+{% block content %}
+<h1>Dump a file</h1>
+<form method="POST" name="dump_form">
+  <div class="input-field">
+    <input id="email" type="text" class="validate">
+    <label for="email">From</label>
+    <span class="helper-text" data-error="wrong" data-success="right">
+      (optional) Something like you name or email
+    </span>
+  </div>
+  <div class="input-field">
+    <textarea id="message" class="materialize-textarea"></textarea>
+    <label for="message">message</label>
+    <span class="helper-text" data-error="wrong" data-success="right">
+      (optional) A short message or caption
+    </span>
+  </div>
+  <div class="file-field input-field">
+    <div class="btn">
+      <span>File</span>
+      <input type="file">
+    </div>
+    <div class="file-path-wrapper">
+      <input class="file-path validate" type="text">
+    </div>
+  </div>
+  <div class="btn-controls">
+    <button class="waves-effect waves-light btn"
+            type="submit" name="submit" id="submit">
+      Dump file
+    </button>
+  </div>
+</form>
+{% endblock %}

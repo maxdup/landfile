@@ -24,3 +24,11 @@ class User(db.Document, UserMixin):
     login_count = db.IntField()
 
     roles = db.ListField(db.ReferenceField(Role), default=[])
+
+
+class Dump(db.Document):
+    filename = db.StringField()
+    message = db.StringField()
+    uploader = db.ReferenceField(User)
+    uploader_ip = db.StringField()
+    upload_time = db.DateTimeField()
