@@ -1,5 +1,10 @@
+# Landfile configuration
+UPLOAD_FOLDER = None
+
+# Flask configuration
 DEBUG = True
 TEST = False
+ENV = 'development'
 
 # WTForm configuration
 WTF_CSRF_ENABLED = False

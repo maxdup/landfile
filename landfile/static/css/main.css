@@ -24,6 +24,12 @@ body {
     bottom: 0;
     left: 0;
 }
+.card-action {
+    text-align: right;
+}
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
+    margin-right: 0;
+}
 img.page-background {
     position: fixed;
     top: 0;

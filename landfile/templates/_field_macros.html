@@ -1,6 +1,9 @@
 {% macro render_field_with_errors(field) %}
 <div class="input-field">
   {{ field(**kwargs)|safe }} {{ field.label }}
+  {% if field.description %}
+  <span class="helper-text" >{{ field.description }}</span>
+  {% endif %}
   {% if field.errors %}
   {% for error in field.errors %}
   <span class="helper-text" data-error="wrong" data-success="right">{{ error }}</span>
@@ -15,6 +18,18 @@
   <span>{{ field.label.text }}</span>
 </label>
 {% endmacro %}
+
+{% macro render_file_field(field) %}
+<div class="file-field input-field">
+  <div class="btn">
+    <span>{{field.label.text}}</span>
+    {{field(**kwargs)|safe}}
+  </div>
+  <div class="file-path-wrapper">
+    <input class="file-path validate" type="text">
+  </div>
+</div>
+{% endmacro%}
 
 {% macro render_field(field) %}
 <div class="input-field">
