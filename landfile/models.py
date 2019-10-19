@@ -17,18 +17,25 @@ class User(db.Document, UserMixin):
     # handled by flask-security
     active = db.BooleanField(default=True)
     confirmed_at = db.DateTimeField()
-    last_login_at = db.DateTimeField()
-    current_login_at = db.DateTimeField()
-    last_login_ip = db.StringField(max_length=45)
-    current_login_ip = db.StringField(max_length=45)
     login_count = db.IntField()
+    current_login_at = db.DateTimeField()
+    current_login_ip = db.StringField(max_length=45)
+    last_login_at = db.DateTimeField()
+    last_login_ip = db.StringField(max_length=45)
 
     roles = db.ListField(db.ReferenceField(Role), default=[])
 
 
+class File(db.Document):
+    filename = db.StringField()
+    uploader = db.ReferenceField(User)
+    upload_time = db.DateTimeField(default=datetime.now())
+
+
 class Dump(db.Document):
     filename = db.StringField()
+    original_filename = db.StringField()
     message = db.StringField()
-    uploader = db.ReferenceField(User)
+    upload_time = db.DateTimeField(default=datetime.now())
     uploader_ip = db.StringField()
-    upload_time = db.DateTimeField()
+    uploader_string = db.StringField()

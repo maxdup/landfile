@@ -112,3 +112,4 @@ node_modules/*
 
 # this project
 config.py
+landfile/static/files/*
