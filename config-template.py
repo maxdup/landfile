@@ -1,5 +1,7 @@
 # Landfile configuration
 UPLOAD_FOLDER = None
+DUMPS_FOLDER = None
+DUMP_NOTIFY_EMAIL = None
 
 # Flask configuration
 DEBUG = True

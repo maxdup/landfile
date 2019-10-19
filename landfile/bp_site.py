@@ -1,5 +1,6 @@
+from flask_mail import Message
 import uuid
-from flask import current_app as app, Blueprint, render_template, session, request, send_from_directory, abort
+from flask import current_app as app, Blueprint, render_template, session, request, send_from_directory, abort, after_this_request
 from flask_security import roles_accepted, login_required
 from wtforms import Field, StringField, validators
 from flask_wtf.file import FileField, FileRequired
@@ -32,16 +33,6 @@ def home():
     return render_template('/index.html')
 
 
-@landfile_site.route('/dump', methods=['GET', 'POST'])
-def dump():
-    dump_form = DumpForm()
-    if request.method == 'POST' and dump_form.validate():
-        save_db_dump(dump_form)
-        return render_template('/dumped.html')
-
-    return render_template('/dump.html', dump_form=dump_form)
-
-
 @landfile_site.route('/dumps/<path:filename>')
 @login_required
 def dumps(filename):
@@ -52,6 +43,35 @@ def dumps(filename):
         return send_from_directory(folder, filename)
     except Exception as e:
         abort(404)
+
+
+@landfile_site.route('/dump', methods=['GET', 'POST'])
+def dump():
+    dump_form = DumpForm()
+    if request.method == 'POST' and dump_form.validate():
+        dump = save_db_dump(dump_form)
+        if app.config['DUMP_NOTIFY_EMAIL']:
+            @after_this_request
+            def notify_email(response):
+                msg_dump = os.path.join(
+                    request.url_root, 'dumps', dump.filename)
+
+                msg = Message("LandFile - New file dumped",
+                              recipients=[app.config['DUMP_NOTIFY_EMAIL']])
+
+                msg.html = '<p>New dump from:<br/>' +\
+                           dump.uploader_string + '</p>' +\
+                           '<p>They left this as a message:<br/>' +\
+                           dump.message + '</p>' +\
+                           '<p>See the file here:<br/><a href="' +\
+                           msg_dump + '" >' + msg_dump + '</a></p>'
+
+                mail = app.extensions.get('mail')
+                mail.send(msg)
+                return response
+        return render_template('/dumped.html')
+
+    return render_template('/dump.html', dump_form=dump_form)
 
 
 def save_db_dump(form):
